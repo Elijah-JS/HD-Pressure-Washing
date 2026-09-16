@@ -132,7 +132,7 @@ export function Header() {
               </ul>
             </nav>
 
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1 sm:gap-3">
               <a
                 href={`tel:${site.phone.raw}`}
                 className={cn(
@@ -150,11 +150,14 @@ export function Header() {
                 <span className="tnum">{site.phone.display}</span>
               </a>
 
-              {/* Compact on phones so it never crowds the logo, full size from
-                  sm up. Kept visible at every width - it is the primary CTA. */}
-              <Button href="#quote" size="compact">
-                Get a Free Quote
-              </Button>
+              {/* Desktop only. On smaller screens the hero owns the quote CTA
+                  so the header can stay logo + menu - repeating the same
+                  bright button in both places reads as pressure. */}
+              <div className="hidden lg:block">
+                <Button href="#quote" size="compact">
+                  Get a Free Quote
+                </Button>
+              </div>
 
               <button
                 type="button"

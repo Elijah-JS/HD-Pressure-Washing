@@ -38,23 +38,13 @@ export function Hero() {
       />
 
       <Container className="relative">
-        {/* Shorter on phones: the point of the hero is to get the headline,
-            the CTA and the phone number on screen at once, not to fill the
-            viewport. */}
-        <div className="flex min-h-[32rem] flex-col justify-end pt-28 pb-11 sm:min-h-[40rem] sm:pt-36 sm:pb-14 lg:min-h-[46rem] lg:pb-20">
+        {/* Full-viewport on phones so the first screen is one composed frame
+            rather than a short hero with the next section already crowding in. */}
+        <div className="flex min-h-svh flex-col justify-end pt-24 pb-16 sm:min-h-[40rem] sm:pt-36 sm:pb-14 lg:min-h-[46rem] lg:pb-20">
           <div className="max-w-2xl">
-            <p
-              data-reveal=""
-              className="eyebrow inline-flex items-center gap-2 rounded-full border border-white/15 bg-navy-950/55 px-3 py-1.5 text-[0.6875rem] text-white/90 sm:px-3.5 sm:text-xs"
-            >
-              <MapPin className="size-3.5 text-brand-300" strokeWidth={2.5} aria-hidden="true" />
-              Fontana, CA &middot; Serving the Inland Empire
-            </p>
-
             <h1
               data-reveal=""
-              style={{ '--reveal-delay': '80ms' } as React.CSSProperties}
-              className="mt-5 text-[clamp(1.9375rem,1.05rem+4.3vw,4rem)] leading-[1.06] font-bold text-white sm:mt-6 sm:leading-[1.03]"
+              className="text-[clamp(1.875rem,1.05rem+4.1vw,4rem)] leading-[1.06] font-bold text-white sm:leading-[1.03]"
             >
               Professional exterior cleaning across the{' '}
               <span className="text-brand-300">Inland Empire</span>
@@ -62,8 +52,18 @@ export function Hero() {
 
             <p
               data-reveal=""
-              style={{ '--reveal-delay': '160ms' } as React.CSSProperties}
-              className="mt-4 max-w-xl text-base leading-relaxed text-white/80 sm:mt-6 sm:text-lg"
+              style={{ '--reveal-delay': '70ms' } as React.CSSProperties}
+              className="mt-3.5 inline-flex items-center gap-1.5 text-[0.6875rem] font-medium tracking-wide text-brand-300 sm:mt-5 sm:text-[0.75rem]"
+            >
+              <MapPin className="size-3 opacity-90 sm:size-3.5" strokeWidth={2.5} aria-hidden="true" />
+              <span className="sm:hidden">Fontana, CA &middot; Inland Empire</span>
+              <span className="hidden sm:inline">Fontana, CA &middot; Serving the Inland Empire</span>
+            </p>
+
+            <p
+              data-reveal=""
+              style={{ '--reveal-delay': '140ms' } as React.CSSProperties}
+              className="mt-4 max-w-xl text-[0.9375rem] leading-relaxed text-white/75 sm:mt-6 sm:text-lg"
             >
               Pressure washing, house washing, roof and solar panel cleaning for homes and
               businesses throughout Fontana, Rancho Cucamonga, Redlands and surrounding
@@ -72,10 +72,10 @@ export function Hero() {
 
             <div
               data-reveal=""
-              style={{ '--reveal-delay': '240ms' } as React.CSSProperties}
-              className="mt-7 flex flex-col gap-2.5 sm:mt-9 sm:flex-row sm:items-center sm:gap-3"
+              style={{ '--reveal-delay': '220ms' } as React.CSSProperties}
+              className="mt-6 flex flex-col items-start gap-3.5 sm:mt-9 sm:flex-row sm:items-center sm:gap-3"
             >
-              <Button href="#quote" size="lg" className="w-full sm:w-auto">
+              <Button href="#quote" size="lg">
                 Get a Free Quote
                 <ArrowRight
                   className="size-4 transition-transform duration-300 ease-[var(--ease-out-soft)] group-hover/btn:translate-x-1"
@@ -83,29 +83,32 @@ export function Hero() {
                   aria-hidden="true"
                 />
               </Button>
-              <Button href="#results" variant="onDark" size="lg" className="w-full sm:w-auto">
+              {/* Text treatment on phones so it cannot compete with the primary
+                  button. From sm up it becomes a secondary button in the row. */}
+              <a
+                href="#results"
+                className="inline-flex items-center gap-1.5 py-1 text-[0.9375rem] font-semibold text-white/80 transition-colors hover:text-white sm:hidden"
+              >
                 View Our Work
-              </Button>
+                <ArrowRight className="size-3.5" strokeWidth={2.25} aria-hidden="true" />
+              </a>
+              <div className="hidden sm:block">
+                <Button href="#results" variant="onDark" size="lg">
+                  View Our Work
+                </Button>
+              </div>
             </div>
 
-            {/* Click-to-call, kept distinct from the two buttons so the CTA
-                hierarchy stays unambiguous. */}
-            <div
+            <a
               data-reveal=""
-              style={{ '--reveal-delay': '300ms' } as React.CSSProperties}
-              className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm sm:mt-8 sm:gap-x-4"
+              style={{ '--reveal-delay': '280ms' } as React.CSSProperties}
+              href={`tel:${site.phone.raw}`}
+              className="mt-5 inline-flex items-center gap-2 text-[0.8125rem] text-white/55 transition-colors hover:text-white/80 sm:mt-7 sm:text-sm"
             >
-              <span className="text-white/55">Prefer to talk it through?</span>
-              <a
-                href={`tel:${site.phone.raw}`}
-                className="group -my-2 inline-flex items-center gap-2 py-2 font-semibold text-white transition-colors hover:text-brand-300"
-              >
-                <Phone className="size-4 text-brand-300" strokeWidth={2.5} aria-hidden="true" />
-                <span className="tnum border-b border-white/25 pb-px transition-colors group-hover:border-brand-300">
-                  {site.phone.display}
-                </span>
-              </a>
-            </div>
+              <Phone className="size-3.5" strokeWidth={2} aria-hidden="true" />
+              <span className="hidden sm:inline">Prefer to talk it through?</span>
+              <span className="tnum font-medium text-white/90">{site.phone.display}</span>
+            </a>
           </div>
         </div>
       </Container>

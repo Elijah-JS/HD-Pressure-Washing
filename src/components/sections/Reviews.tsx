@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Quote, ShieldCheck } from 'lucide-react';
+import { Facebook, Instagram, Quote } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { site } from '@/lib/site';
@@ -7,25 +7,30 @@ import { cn } from '@/lib/cn';
 const SOCIAL_ICON = { Facebook, Instagram } as const;
 
 /**
- * DELIBERATELY EMPTY.
- *
- * No testimonial, rating, review count or customer name appears anywhere on
- * the client's existing website, and no public listing for this business could
- * be verified. Rather than invent quotes, this section ships as a finished
- * layout with three reserved slots.
- *
- * To populate: drop objects into REVIEWS below - the placeholder frames are
- * replaced automatically. Only paste reviews that exist verbatim on a real
- * profile, and attribute them to that source.
+ * Verbatim customer reviews from the public Thumbtack listing for
+ * HD Pressure Washing. Quotes, names and dates are published as they
+ * appear. No ratings, review counts or aggregate scores are shown -
+ * those were not supplied with the source material.
  */
-type Review = {
-  quote: string;
-  name: string;
-  detail: string;
-  source: string;
-};
-
-const REVIEWS: Review[] = [];
+const REVIEWS = [
+  {
+    quote:
+      'Cesar and his crew were fantastic. They were on time, explained what they were going to do, cleaned my roof and solar panels, took pictures for a before and after, and cleaned up their mess. I recommend them 10 times over.',
+    name: 'Garrett L.',
+    date: 'Nov 5, 2024',
+  },
+  {
+    quote:
+      'Roof cleaning was over my expectations. Cesar came on time, got straight to the point and I was more than happy with his work. I would highly recommend HD Pressure Washing.',
+    name: 'Sara D.',
+    date: 'Mar 5, 2025',
+  },
+  {
+    quote: 'Cesar answered all my questions and did a great job!',
+    name: 'Lisa V.',
+    date: 'Jan 28, 2025',
+  },
+] as const;
 
 /**
  * On a phone, three stacked cards is ~900px of vertical scrolling for content
@@ -37,122 +42,55 @@ const RAIL =
   'mt-8 -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 ' +
   '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden ' +
   'sm:-mx-8 sm:px-8 ' +
-  'md:mx-0 md:mt-10 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0';
+  'md:mx-0 md:mt-10 md:grid md:grid-cols-3 md:items-stretch md:gap-6 md:overflow-visible md:px-0 md:pb-0';
 
 const CARD =
   'flex w-[80vw] max-w-[20rem] shrink-0 snap-start flex-col rounded-2xl border ' +
   'md:w-auto md:max-w-none';
 
 export function Reviews() {
-  const hasReviews = REVIEWS.length > 0;
-
   return (
-    <section aria-labelledby="reviews-heading" className="bg-white py-14 sm:py-20 lg:py-32">
+    <section id="reviews" aria-label="What customers say" className="scroll-mt-24 bg-white py-14 sm:py-20 lg:py-32">
       <Container>
         <SectionHeading
           eyebrow="Reputation"
           title="What customers say"
-          lede={
-            hasReviews
-              ? 'Reviews from real HD Pressure Washing customers - published exactly as they were written, with nothing invented in between.'
-              : 'This is where real reviews from HD Pressure Washing customers go - published exactly as they were written.'
-          }
+          lede="Reviews from real HD Pressure Washing customers, published exactly as they were written."
           align="center"
         />
 
-        {hasReviews ? (
-          <ul className={RAIL}>
-            {REVIEWS.map((review) => (
-              <li
-                key={review.name + review.quote.slice(0, 24)}
-                data-reveal=""
-                className={cn(CARD, 'border-ink-900/8 bg-bone p-6 shadow-subtle sm:p-7')}
-              >
-                <Quote className="size-6 text-brand-600" strokeWidth={2} aria-hidden="true" />
-                <blockquote className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-ink-700">
-                  {review.quote}
-                </blockquote>
-                <footer className="mt-6 border-t border-ink-900/8 pt-5">
-                  <p className="text-[0.9375rem] font-semibold text-ink-900">{review.name}</p>
-                  <p className="mt-0.5 text-sm text-ink-500">{review.detail}</p>
-                  <p className="mt-2 text-xs text-ink-400">via {review.source}</p>
-                </footer>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <>
-            {/* Explanation first, so the frames below read as a deliberate
-                reservation rather than as an unfinished section. */}
-            <div
+        <ul className={RAIL}>
+          {REVIEWS.map((review, i) => (
+            <li
+              key={review.name + review.date}
               data-reveal=""
-              className="mx-auto mt-8 flex max-w-3xl items-start gap-3 rounded-2xl border border-ink-900/8 bg-bone px-5 py-4 sm:mt-10 sm:gap-3.5 sm:px-6 sm:py-5"
+              style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}
+              className={cn(CARD, 'border-ink-900/8 bg-bone p-6 shadow-subtle sm:p-7')}
             >
-              <ShieldCheck
-                className="mt-0.5 size-5 shrink-0 text-brand-600"
-                strokeWidth={1.9}
-                aria-hidden="true"
-              />
-              <p className="text-sm leading-relaxed text-ink-600">
-                <span className="font-semibold text-ink-900">Reserved for real reviews.</span> HD
-                Pressure Washing&rsquo;s verified reviews slot straight into these three frames. We
-                left them empty on purpose &mdash; invented testimonials are the fastest way for a
-                local business to lose the trust this page is built to earn.
-              </p>
-            </div>
+              <Quote className="size-6 text-brand-600" strokeWidth={2} aria-hidden="true" />
+              <blockquote className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-ink-700">
+                {review.quote}
+              </blockquote>
+              <footer className="mt-6 border-t border-ink-900/8 pt-5">
+                <p className="text-[0.9375rem] font-semibold text-ink-900">{review.name}</p>
+                <p className="mt-0.5 text-sm text-ink-500">{review.date}</p>
+              </footer>
+            </li>
+          ))}
+        </ul>
 
-            <ul className={RAIL}>
-              {[0, 1, 2].map((i) => (
-                <li
-                  key={i}
-                  data-reveal=""
-                  style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}
-                  className={cn(CARD, 'border-dashed border-ink-900/15 bg-ink-50/60 p-6 sm:p-7')}
-                >
-                  <div className="flex items-start justify-between">
-                    <span className="flex size-10 items-center justify-center rounded-full bg-white text-ink-300 ring-1 ring-ink-900/6">
-                      <Quote className="size-[1.125rem]" strokeWidth={2} aria-hidden="true" />
-                    </span>
-                    <span className="font-display text-sm font-semibold text-ink-300 tabular-nums">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                  </div>
+        <p
+          data-reveal=""
+          className="mt-6 text-center text-xs font-medium tracking-wide text-ink-400 sm:mt-7"
+        >
+          Source: Thumbtack
+        </p>
 
-                  {/* Shape of the review that will sit here. */}
-                  <div aria-hidden="true" className="mt-5 flex-1 space-y-2.5 sm:mt-6">
-                    <div className="h-2.5 w-full rounded-full bg-ink-900/8" />
-                    <div className="h-2.5 w-[94%] rounded-full bg-ink-900/8" />
-                    <div className="h-2.5 w-[88%] rounded-full bg-ink-900/8" />
-                    <div className="h-2.5 w-[62%] rounded-full bg-ink-900/8" />
-                  </div>
-
-                  <div
-                    aria-hidden="true"
-                    className="mt-6 flex items-center gap-3 border-t border-ink-900/8 pt-5 sm:mt-7"
-                  >
-                    <div className="size-9 rounded-full bg-ink-900/8" />
-                    <div className="space-y-1.5">
-                      <div className="h-2.5 w-24 rounded-full bg-ink-900/8" />
-                      <div className="h-2 w-16 rounded-full bg-ink-900/6" />
-                    </div>
-                  </div>
-
-                  <p className="sr-only">
-                    Reserved slot for a verified customer review. No review content has been
-                    written for this placeholder.
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
-
-        {/* Genuine, verifiable profiles - these links are real. */}
         <div
           data-reveal=""
           className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center"
         >
-          <span className="text-sm text-ink-500">See our work and reviews on</span>
+          <span className="text-sm text-ink-500">See our work on</span>
           <div className="flex flex-wrap items-center justify-center gap-3">
             {site.social.map((profile) => {
               const Icon = SOCIAL_ICON[profile.name as keyof typeof SOCIAL_ICON];

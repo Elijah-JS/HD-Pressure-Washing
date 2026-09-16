@@ -6,15 +6,17 @@ import { site } from '@/lib/site';
 import { cn } from '@/lib/cn';
 
 /**
- * Persistent call / quote bar for small screens.
+ * Persistent quote bar for small screens.
  *
- * Appears once the hero is behind you and hides again over the quote section,
- * where the same two actions are already on screen at full size.
+ * One dominant conversion control at a time: hidden while the hero CTA is
+ * still on screen, visible after the hero scrolls away, and hidden again
+ * as the quote form approaches so the form itself is the conversion.
  */
 export function MobileCTABar() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    const hero = document.getElementById('top');
     const quote = document.getElementById('quote');
     const footer = document.querySelector('footer');
 
@@ -22,27 +24,30 @@ export function MobileCTABar() {
     let overTarget = false;
     const sync = () => setVisible(pastHero && !overTarget);
 
-    const onScroll = () => {
-      pastHero = window.scrollY > window.innerHeight * 0.6;
-      sync();
-    };
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => {
+        pastHero = !entry || entry.intersectionRatio < 0.18;
+        sync();
+      },
+      { threshold: [0, 0.12, 0.18, 0.4, 0.7] },
+    );
 
-    const observer = new IntersectionObserver(
+    const targetObserver = new IntersectionObserver(
       (entries) => {
-        // Any of the "already has CTAs" regions being on screen hides the bar.
         overTarget = entries.some((e) => e.isIntersecting);
         sync();
       },
-      { threshold: 0 },
+      // Fire a little early so the bar yields before the form is covered.
+      { threshold: 0, rootMargin: '0px 0px 25% 0px' },
     );
-    if (quote) observer.observe(quote);
-    if (footer) observer.observe(footer);
 
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+    if (hero) heroObserver.observe(hero);
+    if (quote) targetObserver.observe(quote);
+    if (footer) targetObserver.observe(footer);
+
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      observer.disconnect();
+      heroObserver.disconnect();
+      targetObserver.disconnect();
     };
   }, []);
 
@@ -54,11 +59,11 @@ export function MobileCTABar() {
       )}
       aria-hidden={!visible}
     >
-      <div className="flex gap-2.5 px-4 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))]">
+      <div className="flex gap-2 px-4 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))]">
         <a
           href={`tel:${site.phone.raw}`}
           tabIndex={visible ? undefined : -1}
-          className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full border border-ink-900/15 bg-white text-[0.9375rem] font-semibold text-ink-900 active:bg-ink-50"
+          className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full px-4 text-[0.875rem] font-semibold text-ink-800 active:bg-ink-900/5"
         >
           <Phone className="size-4 text-brand-600" strokeWidth={2.25} aria-hidden="true" />
           Call
@@ -66,7 +71,7 @@ export function MobileCTABar() {
         <a
           href="#quote"
           tabIndex={visible ? undefined : -1}
-          className="inline-flex h-12 flex-[1.45] items-center justify-center gap-2 rounded-full bg-brand-600 text-[0.9375rem] font-semibold text-white active:bg-brand-700"
+          className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-full bg-brand-600 text-[0.9375rem] font-semibold text-white active:bg-brand-700"
         >
           Get a Free Quote
           <ArrowRight className="size-4" strokeWidth={2.5} aria-hidden="true" />

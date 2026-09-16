@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowRight, Info } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
@@ -56,15 +56,11 @@ const GALLERY: { src: string; alt: string; tag: string; span: string }[] = [
   },
 ];
 
-/**
- * PLACEHOLDER: the client has no before/after pairs on file. The slider is
- * fully functional - supply `beforeSrc` here and it renders immediately.
- */
 const FEATURED_PAIR: BeforeAfterPair = {
-  afterSrc: '/images/work/driveway-concrete.webp',
-  afterAlt: 'Cleaned concrete driveway surface',
-  caption: 'Driveway & concrete restoration',
-  location: 'Before / after comparison',
+  beforeSrc: '/images/work/patio-before.webp',
+  beforeAlt: 'Weathered stone patio heavily stained with dirt and organic buildup',
+  afterSrc: '/images/work/patio-after.webp',
+  afterAlt: 'The same stone patio after pressure washing, with the surface restored to a clean tan',
 };
 
 export function Results() {
@@ -85,11 +81,6 @@ export function Results() {
             className="lg:col-span-7"
           >
             <BeforeAfterSlider pair={FEATURED_PAIR} />
-            <p className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-ink-400">
-              <Info className="mt-0.5 size-3.5 shrink-0" strokeWidth={2} aria-hidden="true" />
-              Sample frame. Drag the handle to see how it works &mdash; HD&rsquo;s own before and
-              after photos drop straight into this component.
-            </p>
           </div>
 
           <div
