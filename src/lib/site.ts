@@ -16,8 +16,7 @@
 export const site = {
   name: 'HD Pressure Washing',
   legalName: 'HD Pressure Washing',
-  /** Replace with the real deployment origin before launch. */
-  url: 'https://hdpressurewasher.com',
+  url: 'https://hdpressurewashing.netlify.app',
   tagline: 'Professional Exterior Cleaning Across the Inland Empire',
 
   phone: {

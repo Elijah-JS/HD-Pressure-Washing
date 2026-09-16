@@ -16,9 +16,9 @@ const archivo = Archivo({
   variable: '--font-archivo',
 });
 
-const TITLE = 'Pressure Washing in Fontana, CA | HD Pressure Washing';
+const TITLE = 'HD Pressure Washing | Professional Exterior Cleaning';
 const DESCRIPTION =
-  'Professional pressure washing and exterior cleaning for homes and businesses in Fontana, Rancho Cucamonga, Redlands and the Inland Empire. House washing, roof, driveway, gutter, window and solar panel cleaning. Free quotes.';
+  'Professional pressure washing and exterior cleaning serving Fontana and the Inland Empire.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -54,10 +54,11 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     images: [
       {
-        url: '/og.jpg',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: `${site.name} - professional exterior cleaning across the Inland Empire`,
+        alt: 'HD Pressure Washing',
+        type: 'image/jpeg',
       },
     ],
   },
@@ -65,7 +66,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: TITLE,
     description: DESCRIPTION,
-    images: ['/og.jpg'],
+    images: ['/og-image.jpg'],
   },
   robots: {
     index: true,
