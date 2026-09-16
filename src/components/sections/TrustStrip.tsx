@@ -39,13 +39,13 @@ export function TrustStrip() {
           down, and these four points are the kind of thing a visitor reads in
           a glance - the supporting line is desktop detail, not the message.
         */}
-        <ul className="grid grid-cols-2 gap-x-4 gap-y-5 py-6 sm:grid-cols-2 sm:gap-0 sm:py-0 lg:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-x-4 gap-y-4 py-4 sm:gap-x-8 sm:py-8 md:gap-x-10 md:gap-y-6 md:py-9 xl:grid-cols-4 xl:gap-0 xl:py-0">
           {POINTS.map(({ icon: Icon, label, detail }, i) => (
             <li
               key={label}
               data-reveal=""
               style={{ '--reveal-delay': `${i * 70}ms` } as React.CSSProperties}
-              className="flex items-start gap-2.5 sm:gap-3.5 sm:px-6 sm:py-8 lg:px-7 [&:not(:first-child)]:sm:border-l [&:not(:first-child)]:sm:border-ink-900/8 sm:[&:nth-child(3)]:border-l-0 lg:[&:nth-child(3)]:border-l"
+              className="flex items-start gap-2.5 sm:gap-3.5 xl:px-7 xl:py-8 [&:not(:first-child)]:xl:border-l [&:not(:first-child)]:xl:border-ink-900/8"
             >
               <Icon
                 className="mt-px size-[1.125rem] shrink-0 text-brand-600 sm:mt-0.5 sm:size-5"

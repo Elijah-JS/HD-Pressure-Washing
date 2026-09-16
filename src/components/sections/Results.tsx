@@ -65,17 +65,18 @@ const FEATURED_PAIR: BeforeAfterPair = {
 
 export function Results() {
   return (
-    <section id="results" className="scroll-mt-24 bg-navy-950 py-14 sm:py-20 lg:py-32">
+    <section id="results" className="scroll-mt-24 bg-navy-950 py-10 sm:py-20 lg:py-32">
       <Container>
         <SectionHeading
           tone="dark"
           eyebrow="Our Work"
           title="The results speak before we do"
           lede="Exterior cleaning is judged with the eyes, not a brochure. Here is the kind of work we turn out across the Inland Empire."
+          ledeClassName="hidden md:block"
         />
 
         {/* Featured before / after */}
-        <div className="mt-9 grid grid-cols-1 gap-8 sm:mt-14 sm:gap-10 lg:grid-cols-12 lg:gap-14">
+        <div className="mt-6 grid grid-cols-1 gap-5 sm:mt-12 lg:mt-14 lg:grid-cols-12 lg:items-center lg:gap-14">
           <div
             data-reveal=""
             className="lg:col-span-7"
@@ -86,17 +87,17 @@ export function Results() {
           <div
             data-reveal=""
             style={{ '--reveal-delay': '120ms' } as React.CSSProperties}
-            className="flex flex-col justify-center lg:col-span-5"
+            className="hidden flex-col justify-center md:flex lg:col-span-5"
           >
-            <h3 className="font-display text-2xl leading-tight font-semibold text-white sm:text-[1.75rem]">
+            <h3 className="font-display text-[1.25rem] leading-tight font-semibold text-white sm:text-[1.75rem]">
               Surfaces get restored, not just rinsed
             </h3>
-            <p className="mt-4 leading-relaxed text-ink-300">
+            <p className="mt-2.5 hidden text-[0.9375rem] leading-[1.6] text-ink-300 sm:mt-4 sm:block sm:text-base sm:leading-relaxed">
               We match the method to the surface: high pressure where concrete can take it, a
               gentle soft wash where siding, stucco and roofing cannot. That is the difference
               between a surface that looks clean for a week and one that looks right for a season.
             </p>
-            <ul className="mt-7 space-y-3.5">
+            <ul className="mt-7 hidden space-y-3.5 lg:block">
               {[
                 'Pressure and chemistry matched to each surface',
                 'Biodegradable products, safe around plants and pets',
@@ -115,7 +116,7 @@ export function Results() {
         </div>
 
         {/* Mosaic */}
-        <ul className="mt-10 grid auto-rows-[7rem] grid-cols-2 gap-2.5 sm:mt-14 sm:auto-rows-[10rem] sm:gap-4 lg:mt-20 lg:auto-rows-[11.5rem] lg:grid-cols-4">
+        <ul className="mt-7 grid auto-rows-[5.75rem] grid-cols-2 gap-2 sm:mt-12 sm:auto-rows-[9rem] sm:gap-3.5 md:mt-14 md:auto-rows-[10.5rem] md:gap-4 lg:mt-20 lg:auto-rows-[11.5rem] lg:grid-cols-4">
           {GALLERY.map((item, i) => (
             <li
               key={item.src + item.tag}
@@ -147,13 +148,13 @@ export function Results() {
 
         <div
           data-reveal=""
-          className="mt-10 flex flex-col items-start gap-4 border-t border-white/10 pt-8 sm:mt-12 sm:pt-10 sm:flex-row sm:items-center sm:justify-between"
+          className="mt-7 flex flex-col items-start gap-3 border-t border-white/10 pt-6 sm:mt-12 sm:flex-row sm:items-center sm:justify-between sm:pt-10"
         >
-          <p className="max-w-md text-[0.9375rem] leading-relaxed text-ink-300">
+          <p className="hidden max-w-md text-[0.9375rem] leading-relaxed text-ink-300 sm:block">
             Want to see what we can do with your property? Send a few photos with your quote
             request.
           </p>
-          <Button href="#quote" size="lg" className="w-full shrink-0 sm:w-auto">
+          <Button href="#quote" size="md" className="w-full shrink-0 sm:w-auto sm:h-[3.25rem] sm:px-7 sm:text-base">
             Get a Free Quote
             <ArrowRight
               className="size-4 transition-transform duration-300 ease-[var(--ease-out-soft)] group-hover/btn:translate-x-1"

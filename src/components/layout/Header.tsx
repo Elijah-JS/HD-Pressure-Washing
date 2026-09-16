@@ -83,7 +83,7 @@ export function Header() {
           <div
             className={cn(
               'flex items-center justify-between transition-all duration-300 ease-[var(--ease-out-soft)]',
-              scrolled ? 'h-16' : 'h-20',
+              scrolled ? 'h-14' : 'h-14 sm:h-20',
             )}
           >
             <a
@@ -91,11 +91,44 @@ export function Header() {
               aria-label={`${site.name} - back to top`}
               className="shrink-0 transition-opacity duration-200 hover:opacity-80"
             >
-              <Logo priority className={cn(scrolled ? 'h-9' : 'h-10', 'w-auto sm:h-11')} />
+              <Logo priority className={cn(scrolled ? 'h-8' : 'h-9', 'w-auto sm:h-11')} />
             </a>
 
+            {/* Tablet: a few destinations, no quote button. The hero still
+                owns conversion so the bar can stay quiet. */}
+            <nav aria-label="Primary" className="hidden md:block xl:hidden">
+              <ul className="flex items-center gap-0.5">
+                {NAV_LINKS.filter((link) => link.href !== '#top' && link.href !== '#quote').map(
+                  (link) => {
+                    const isActive = active === link.href;
+                    const label = link.href === '#service-areas' ? 'Areas' : link.label;
+                    return (
+                      <li key={link.href}>
+                        <a
+                          href={link.href}
+                          aria-current={isActive ? 'true' : undefined}
+                          className={cn(
+                            'relative rounded-full px-2.5 py-2 text-[0.8125rem] font-medium transition-colors duration-200 lg:px-3 lg:text-[0.875rem]',
+                            onDark
+                              ? isActive
+                                ? 'text-white'
+                                : 'text-white/70 hover:text-white'
+                              : isActive
+                                ? 'text-ink-900'
+                                : 'text-ink-600 hover:text-ink-900',
+                          )}
+                        >
+                          {label}
+                        </a>
+                      </li>
+                    );
+                  },
+                )}
+              </ul>
+            </nav>
+
             {/* Desktop navigation */}
-            <nav aria-label="Primary" className="hidden lg:block">
+            <nav aria-label="Primary" className="hidden xl:block">
               <ul className="flex items-center gap-1">
                 {NAV_LINKS.map((link) => {
                   const isActive = active === link.href;
@@ -136,7 +169,7 @@ export function Header() {
               <a
                 href={`tel:${site.phone.raw}`}
                 className={cn(
-                  'hidden items-center gap-2 rounded-full px-3 py-2 text-[0.9375rem] font-semibold transition-colors md:inline-flex',
+                  'hidden min-h-11 items-center gap-2 rounded-full px-3 py-2 text-[0.9375rem] font-semibold transition-colors md:inline-flex',
                   onDark
                     ? 'text-white hover:bg-white/10'
                     : 'text-ink-900 hover:bg-ink-900/5',
@@ -153,7 +186,7 @@ export function Header() {
               {/* Desktop only. On smaller screens the hero owns the quote CTA
                   so the header can stay logo + menu - repeating the same
                   bright button in both places reads as pressure. */}
-              <div className="hidden lg:block">
+              <div className="hidden xl:block">
                 <Button href="#quote" size="compact">
                   Get a Free Quote
                 </Button>
@@ -166,7 +199,7 @@ export function Header() {
                 aria-expanded={open}
                 aria-controls="mobile-menu"
                 className={cn(
-                  'inline-flex size-11 items-center justify-center rounded-full transition-colors lg:hidden',
+                  'inline-flex size-11 items-center justify-center rounded-full transition-colors md:hidden',
                   onDark ? 'text-white hover:bg-white/10' : 'text-ink-900 hover:bg-ink-900/5',
                 )}
               >
@@ -180,7 +213,7 @@ export function Header() {
       {/* Mobile sheet */}
       <div
         className={cn(
-          'fixed inset-0 z-[60] lg:hidden',
+          'fixed inset-0 z-[60] md:hidden',
           open ? 'pointer-events-auto' : 'pointer-events-none',
         )}
         aria-hidden={!open}

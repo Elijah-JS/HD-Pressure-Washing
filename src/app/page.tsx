@@ -25,7 +25,7 @@ export default function HomePage() {
 
       <Header />
 
-      <main id="main">
+      <main id="main" className="max-sm:pb-16">
         <Hero />
         <TrustStrip />
         <Services />

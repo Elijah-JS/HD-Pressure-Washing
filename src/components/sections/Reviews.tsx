@@ -1,8 +1,8 @@
 import { Facebook, Instagram, Quote } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { ReviewExcerpt } from '@/components/ui/ReviewExcerpt';
 import { site } from '@/lib/site';
-import { cn } from '@/lib/cn';
 
 const SOCIAL_ICON = { Facebook, Instagram } as const;
 
@@ -32,40 +32,55 @@ const REVIEWS = [
   },
 ] as const;
 
-/**
- * On a phone, three stacked cards is ~900px of vertical scrolling for content
- * the visitor skims. A snap-scrolling rail keeps all three at one card's
- * height and matches how people already read testimonials on mobile.
- * From md up it reverts to the three-column grid.
- */
-const RAIL =
-  'mt-8 -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 ' +
-  '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden ' +
-  'sm:-mx-8 sm:px-8 ' +
-  'md:mx-0 md:mt-10 md:grid md:grid-cols-3 md:items-stretch md:gap-6 md:overflow-visible md:px-0 md:pb-0';
-
-const CARD =
-  'flex w-[80vw] max-w-[20rem] shrink-0 snap-start flex-col rounded-2xl border ' +
-  'md:w-auto md:max-w-none';
-
 export function Reviews() {
   return (
-    <section id="reviews" aria-label="What customers say" className="scroll-mt-24 bg-white py-14 sm:py-20 lg:py-32">
+    <section id="reviews" aria-label="What customers say" className="scroll-mt-24 bg-white py-10 sm:py-20 lg:py-32">
       <Container>
         <SectionHeading
           eyebrow="Reputation"
           title="What customers say"
           lede="Reviews from real HD Pressure Washing customers, published exactly as they were written."
+          ledeClassName="hidden lg:block"
           align="center"
         />
 
-        <ul className={RAIL}>
+        {/* Phone + tablet: editorial snap carousel. One card leads, the next
+            peeks so swipe is obvious. Desktop is the three-column grid. */}
+        <ul
+          className={
+            'mt-6 -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 ' +
+            '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden ' +
+            'sm:-mx-8 sm:px-8 md:-mx-10 md:gap-4 md:px-10 ' +
+            'lg:hidden'
+          }
+        >
+          {REVIEWS.map((review) => (
+            <li
+              key={review.name + review.date}
+              className="flex w-[min(86vw,22rem)] shrink-0 snap-start snap-always flex-col rounded-2xl bg-bone px-4 py-4 md:w-[min(52vw,24rem)] md:px-5 md:py-5"
+            >
+              <Quote className="size-4 text-brand-600" strokeWidth={2} aria-hidden="true" />
+              <blockquote className="mt-2.5 text-[0.9375rem] leading-[1.55] text-ink-700">
+                <span className="md:hidden">
+                  <ReviewExcerpt text={review.quote} />
+                </span>
+                <span className="hidden md:inline">{review.quote}</span>
+              </blockquote>
+              <p className="mt-3 text-[0.8125rem] font-semibold text-ink-900">
+                {review.name}
+                <span className="font-normal text-ink-400"> · {review.date}</span>
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <ul className="mt-10 hidden grid-cols-3 items-stretch gap-6 lg:grid">
           {REVIEWS.map((review, i) => (
             <li
               key={review.name + review.date}
               data-reveal=""
               style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}
-              className={cn(CARD, 'border-ink-900/8 bg-bone p-6 shadow-subtle sm:p-7')}
+              className="flex flex-col rounded-2xl border border-ink-900/8 bg-bone p-7 shadow-subtle"
             >
               <Quote className="size-6 text-brand-600" strokeWidth={2} aria-hidden="true" />
               <blockquote className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-ink-700">
@@ -79,35 +94,30 @@ export function Reviews() {
           ))}
         </ul>
 
-        <p
-          data-reveal=""
-          className="mt-6 text-center text-xs font-medium tracking-wide text-ink-400 sm:mt-7"
-        >
+        <p className="mt-4 text-center text-[0.6875rem] font-medium tracking-wide text-ink-400 sm:mt-7">
           Source: Thumbtack
         </p>
 
         <div
           data-reveal=""
-          className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center"
+          className="mt-5 flex items-center justify-center gap-2 sm:mt-10 sm:gap-3"
         >
-          <span className="text-sm text-ink-500">See our work on</span>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {site.social.map((profile) => {
-              const Icon = SOCIAL_ICON[profile.name as keyof typeof SOCIAL_ICON];
-              return (
-                <a
-                  key={profile.name}
-                  href={profile.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-ink-900/12 bg-white px-4 py-2.5 text-[0.875rem] font-semibold text-ink-800 transition-colors duration-200 hover:border-ink-900/25 hover:text-brand-600"
-                >
-                  <Icon className="size-4" strokeWidth={2} aria-hidden="true" />
-                  {profile.name}
-                </a>
-              );
-            })}
-          </div>
+          <span className="hidden text-sm text-ink-500 sm:inline">See our work on</span>
+          {site.social.map((profile) => {
+            const Icon = SOCIAL_ICON[profile.name as keyof typeof SOCIAL_ICON];
+            return (
+              <a
+                key={profile.name}
+                href={profile.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-10 items-center gap-1.5 rounded-full px-3 py-2 text-[0.8125rem] font-semibold text-ink-700 sm:border sm:border-ink-900/12 sm:bg-white sm:px-4 sm:text-[0.875rem] sm:text-ink-800"
+              >
+                <Icon className="size-3.5 sm:size-4" strokeWidth={2} aria-hidden="true" />
+                {profile.name}
+              </a>
+            );
+          })}
         </div>
       </Container>
     </section>

@@ -25,7 +25,7 @@ export function BeforeAfterSlider({ pair }: { pair: BeforeAfterPair }) {
 
   return (
     <figure className="group/ba">
-      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-navy-900 select-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-400 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-navy-950">
+      <div className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl bg-navy-900 select-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-400 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-navy-950 sm:aspect-[16/10]">
         {/* AFTER - the base layer */}
         <Image
           src={pair.afterSrc}
@@ -88,7 +88,7 @@ export function BeforeAfterSlider({ pair }: { pair: BeforeAfterPair }) {
           value={pos}
           onChange={(e) => setPos(Number(e.target.value))}
           aria-valuetext={`${Math.round(pos)}% before`}
-          className="absolute inset-0 z-30 h-full w-full cursor-ew-resize appearance-none bg-transparent focus-visible:outline-none [&::-moz-range-thumb]:h-full [&::-moz-range-thumb]:w-11 [&::-moz-range-thumb]:cursor-ew-resize [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-transparent [&::-webkit-slider-thumb]:h-[28rem] [&::-webkit-slider-thumb]:w-11 [&::-webkit-slider-thumb]:cursor-ew-resize [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:bg-transparent"
+          className="absolute inset-0 z-30 h-full w-full cursor-ew-resize touch-none appearance-none bg-transparent focus-visible:outline-none [&::-moz-range-thumb]:h-full [&::-moz-range-thumb]:w-11 [&::-moz-range-thumb]:cursor-ew-resize [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-transparent [&::-webkit-slider-thumb]:h-[28rem] [&::-webkit-slider-thumb]:w-11 [&::-webkit-slider-thumb]:cursor-ew-resize [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:bg-transparent"
         />
 
       </div>

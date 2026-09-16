@@ -37,9 +37,9 @@ export const FAQS = [
 
 export function Faq() {
   return (
-    <section aria-labelledby="faq-heading" className="bg-bone py-14 sm:py-20 lg:py-28">
+    <section aria-labelledby="faq-heading" className="bg-bone py-10 sm:py-20 lg:py-28">
       <Container>
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:col-span-4 lg:self-start">
             <SectionHeading
               eyebrow="Common Questions"
@@ -49,7 +49,7 @@ export function Faq() {
             <p
               data-reveal=""
               style={{ '--reveal-delay': '120ms' } as React.CSSProperties}
-              className="mt-5 text-[0.9375rem] leading-relaxed text-ink-500"
+              className="mt-5 hidden text-[0.9375rem] leading-relaxed text-ink-500 md:block"
             >
               Still unsure about something? Call{' '}
               <a
@@ -75,13 +75,13 @@ export function Faq() {
                   style={{ '--reveal-delay': `${Math.min(i, 3) * 60}ms` } as React.CSSProperties}
                   className="group border-b border-ink-900/10"
                 >
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left [&::-webkit-details-marker]:hidden">
+                  <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 py-3.5 text-left sm:min-h-14 sm:gap-6 sm:py-5 [&::-webkit-details-marker]:hidden">
                     <h3 className="font-display text-[1.0625rem] leading-snug font-semibold text-ink-900 transition-colors group-hover:text-brand-700">
                       {item.q}
                     </h3>
                     <span
                       aria-hidden="true"
-                      className="flex size-8 shrink-0 items-center justify-center rounded-full border border-ink-900/10 bg-white text-ink-500 transition-all duration-300 ease-[var(--ease-out-soft)] group-hover:border-ink-900/20 group-open:rotate-45 group-open:border-brand-500 group-open:bg-brand-500 group-open:text-white"
+                      className="flex size-10 shrink-0 items-center justify-center rounded-full border border-ink-900/10 bg-white text-ink-500 transition-all duration-300 ease-[var(--ease-out-soft)] group-hover:border-ink-900/20 group-open:rotate-45 group-open:border-brand-500 group-open:bg-brand-500 group-open:text-white"
                     >
                       <Plus className="size-4" strokeWidth={2.25} />
                     </span>

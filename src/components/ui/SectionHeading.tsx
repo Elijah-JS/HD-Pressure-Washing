@@ -13,6 +13,7 @@ export function SectionHeading({
   tone = 'light',
   as: Tag = 'h2',
   className,
+  ledeClassName,
 }: {
   eyebrow?: string;
   title: ReactNode;
@@ -21,6 +22,7 @@ export function SectionHeading({
   tone?: 'light' | 'dark';
   as?: 'h2' | 'h3';
   className?: string;
+  ledeClassName?: string;
 }) {
   const dark = tone === 'dark';
 
@@ -36,7 +38,7 @@ export function SectionHeading({
         <div
           data-reveal=""
           className={cn(
-            'eyebrow mb-3 flex items-center gap-3 sm:mb-4',
+            'eyebrow mb-2.5 flex items-center gap-3 sm:mb-4',
             align === 'center' && 'justify-center',
             dark ? 'text-brand-300' : 'text-brand-600',
           )}
@@ -53,7 +55,7 @@ export function SectionHeading({
         data-reveal=""
         style={{ '--reveal-delay': '60ms' } as React.CSSProperties}
         className={cn(
-          'text-[clamp(1.75rem,1.05rem+2.9vw,3rem)] leading-[1.12] font-bold sm:leading-[1.08]',
+          'text-[1.5rem] leading-[1.18] font-bold sm:text-[clamp(1.85rem,1.15rem+2.4vw,3rem)] sm:leading-[1.1] lg:leading-[1.08]',
           dark && 'text-white',
         )}
       >
@@ -65,8 +67,9 @@ export function SectionHeading({
           data-reveal=""
           style={{ '--reveal-delay': '120ms' } as React.CSSProperties}
           className={cn(
-            'mt-4 text-base leading-relaxed sm:mt-5 sm:text-lg',
+            'mt-2.5 max-w-[36rem] text-[0.875rem] leading-[1.5] sm:mt-5 sm:text-lg sm:leading-relaxed',
             dark ? 'text-ink-200' : 'text-ink-600',
+            ledeClassName,
           )}
         >
           {lede}

@@ -95,18 +95,6 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-US" className={`${inter.variable} ${archivo.variable}`}>
-      <head>
-        {/*
-          Marks the document as scripted before first paint. The entrance
-          animations hide themselves only under `html.js`, so if this never
-          runs the page still renders fully visible instead of blank.
-        */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `document.documentElement.classList.add('js')`,
-          }}
-        />
-      </head>
       <body>{children}</body>
     </html>
   );

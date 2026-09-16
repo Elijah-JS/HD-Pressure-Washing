@@ -11,11 +11,11 @@ export function Footer() {
   return (
     <footer className="bg-navy-950 text-ink-300">
       <Container>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 py-16 sm:gap-x-10 lg:grid-cols-12 lg:py-20">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-10 sm:gap-x-10 md:grid-cols-12 md:gap-y-12 md:py-16 lg:py-20">
           {/* Identity + contact */}
-          <div className="col-span-2 lg:col-span-4">
+          <div className="col-span-2 md:col-span-12 lg:col-span-4">
             <Logo className="h-11 w-auto" />
-            <p className="mt-6 max-w-xs text-[0.9375rem] leading-relaxed text-ink-400">
+            <p className="mt-4 max-w-xs text-[0.875rem] leading-relaxed text-ink-400 sm:mt-6 sm:text-[0.9375rem]">
               Professional pressure washing and exterior cleaning for homes and businesses across
               Fontana and the Inland Empire.
             </p>
@@ -78,7 +78,7 @@ export function Footer() {
           </div>
 
           {/* Services */}
-          <nav aria-labelledby="footer-services" className="lg:col-span-3">
+          <nav aria-labelledby="footer-services" className="md:col-span-4 lg:col-span-3">
             <h2 id="footer-services" className="text-xs font-semibold tracking-[0.14em] text-white uppercase">
               Services
             </h2>
@@ -94,7 +94,7 @@ export function Footer() {
           </nav>
 
           {/* Areas */}
-          <nav aria-labelledby="footer-areas" className="lg:col-span-3">
+          <nav aria-labelledby="footer-areas" className="md:col-span-4 lg:col-span-3">
             <h2 id="footer-areas" className="text-xs font-semibold tracking-[0.14em] text-white uppercase">
               Service Areas
             </h2>
@@ -117,7 +117,7 @@ export function Footer() {
           </nav>
 
           {/* Company */}
-          <nav aria-labelledby="footer-company" className="lg:col-span-2">
+          <nav aria-labelledby="footer-company" className="md:col-span-4 lg:col-span-2">
             <h2 id="footer-company" className="text-xs font-semibold tracking-[0.14em] text-white uppercase">
               Company
             </h2>

@@ -66,6 +66,7 @@
     scroll-behavior: smooth;
     /* header height + breathing room so anchors never land under the nav */
     scroll-padding-top: 5.5rem;
+    scroll-padding-bottom: 5.5rem;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -76,6 +77,7 @@
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: clip;
   }
 
   h1, h2, h3, h4 {
@@ -128,14 +130,14 @@
    Entrance animation
    Elements tagged data-reveal fade/slide in once, via IntersectionObserver.
 
-   The hidden state is scoped to `html.js`, which is set by a tiny inline
-   script in <head>. If scripting is unavailable or that script fails, the
-   rule never applies and every element renders visible - content must never
-   depend on JS to be readable.
+   The hidden state is scoped to `html.js`. That class is added only after
+   RevealProvider mounts and marks in-view nodes as shown. If the client
+   bundle never loads, the class is never added and every element stays
+   readable - content must never depend on JS to be visible.
    ========================================================================== */
 
 @media (prefers-reduced-motion: no-preference) {
-  .js [data-reveal] {
+  html.js [data-reveal] {
     opacity: 0;
     transform: translateY(14px);
     transition:
@@ -144,7 +146,7 @@
     transition-delay: var(--reveal-delay, 0ms);
   }
 
-  .js [data-reveal='shown'] {
+  html.js [data-reveal='shown'] {
     opacity: 1;
     transform: none;
   }

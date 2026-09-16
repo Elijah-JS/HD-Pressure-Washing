@@ -6,25 +6,26 @@ import { NEARBY_AREAS, PRIMARY_AREAS, site } from '@/lib/site';
 
 export function ServiceAreas() {
   return (
-    <section id="service-areas" className="scroll-mt-24 bg-bone py-14 sm:py-20 lg:py-32">
+    <section id="service-areas" className="scroll-mt-24 bg-bone py-10 sm:py-20 lg:py-32">
       <Container>
-        <div className="grid grid-cols-1 gap-9 lg:grid-cols-12 lg:gap-16">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:col-span-5 lg:self-start">
             <SectionHeading
               eyebrow="Where We Work"
               title="Serving Fontana and the wider Inland Empire"
               lede="Professional pressure washing and exterior cleaning throughout Fontana, Rancho Cucamonga, Redlands and the surrounding Inland Empire communities."
+              ledeClassName="hidden md:block"
             />
 
             <div
               data-reveal=""
               style={{ '--reveal-delay': '180ms' } as React.CSSProperties}
-              className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center"
+              className="mt-5 flex flex-col gap-2 sm:mt-8 sm:flex-row sm:items-center"
             >
               <Button href="#quote">Check Your Address</Button>
               <a
                 href={`tel:${site.phone.raw}`}
-                className="-my-1 inline-flex items-center gap-2 px-1 py-3 text-[0.9375rem] font-semibold text-ink-700 transition-colors hover:text-brand-600"
+                className="-my-1 hidden items-center gap-2 px-1 py-3 text-[0.9375rem] font-semibold text-ink-700 transition-colors hover:text-brand-600 sm:inline-flex"
               >
                 <span className="tnum">{site.phone.display}</span>
               </a>
@@ -44,7 +45,7 @@ export function ServiceAreas() {
                   <a
                     href="#quote"
                     aria-label={`Request a free quote for ${area.city}`}
-                    className="flex items-center gap-4 py-5 sm:gap-8 sm:py-7"
+                    className="flex min-h-12 items-center gap-3 py-3 sm:min-h-0 sm:gap-8 sm:py-7"
                   >
                     <span
                       aria-hidden="true"
@@ -54,11 +55,11 @@ export function ServiceAreas() {
                     </span>
 
                     <span className="min-w-0 flex-1">
-                      <span className="block font-display text-xl leading-tight font-semibold text-ink-900 sm:text-2xl">
+                      <span className="block font-display text-[1.125rem] leading-tight font-semibold text-ink-900 sm:text-xl md:text-2xl">
                         {area.city}
                         <span className="text-ink-400">, CA</span>
                       </span>
-                      <span className="mt-1.5 block text-[0.9375rem] leading-snug text-ink-500">
+                      <span className="mt-1.5 hidden text-[0.9375rem] leading-snug text-ink-500 md:block">
                         {area.blurb}
                       </span>
                     </span>
@@ -73,7 +74,7 @@ export function ServiceAreas() {
               ))}
             </ul>
 
-            <div data-reveal="" className="mt-8">
+            <div data-reveal="" className="mt-6">
               <h3 className="text-[0.6875rem] font-semibold tracking-[0.12em] text-ink-400 uppercase">
                 Also covering
               </h3>
@@ -87,7 +88,7 @@ export function ServiceAreas() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 text-sm leading-relaxed text-ink-500">
+              <p className="mt-5 hidden text-sm leading-relaxed text-ink-500 md:block">
                 Not listed? Give us a call &mdash; if you are in the Inland Empire, there is a good
                 chance we cover you.
               </p>

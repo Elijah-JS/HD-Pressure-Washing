@@ -128,7 +128,7 @@ export function QuoteForm() {
       onSubmit={handleSubmit}
       noValidate
       aria-labelledby={`${formId}-title`}
-      className="rounded-2xl bg-white p-5 shadow-lift sm:rounded-3xl sm:p-8 lg:p-10"
+      className="rounded-2xl bg-white p-4 shadow-lift sm:rounded-3xl sm:p-8 lg:p-10"
     >
       <h3 id={`${formId}-title`} className="font-display text-xl font-bold text-ink-900">
         Request a free quote
@@ -188,7 +188,7 @@ export function QuoteForm() {
               aria-invalid={errors.service ? true : undefined}
               aria-describedby={errors.service ? `${formId}-service-error` : undefined}
               className={cn(
-                'w-full appearance-none rounded-xl border bg-white px-4 py-3 pr-11 text-[0.9375rem] text-ink-900 transition-colors duration-200',
+                'w-full min-h-12 appearance-none rounded-xl border bg-white px-4 py-3.5 pr-11 text-base text-ink-900 transition-colors duration-200',
                 'focus:border-brand-500 focus:ring-4 focus:ring-brand-500/12 focus:outline-none',
                 values.service === '' && 'text-ink-400',
                 errors.service ? 'border-red-400' : 'border-ink-900/12 hover:border-ink-900/25',
@@ -230,7 +230,7 @@ export function QuoteForm() {
             value={values.details}
             onChange={(e) => set('details')(e.target.value)}
             placeholder="Roughly what needs cleaning, the property type, and anything we should know about access."
-            className="w-full resize-y rounded-xl border border-ink-900/12 bg-white px-4 py-3 text-[0.9375rem] text-ink-900 transition-colors duration-200 placeholder:text-ink-400 hover:border-ink-900/25 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/12 focus:outline-none"
+            className="w-full resize-y rounded-xl border border-ink-900/12 bg-white px-4 py-3.5 text-base text-ink-900 transition-colors duration-200 placeholder:text-ink-400 hover:border-ink-900/25 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/12 focus:outline-none"
           />
         </div>
       </div>
@@ -352,7 +352,7 @@ function Field({
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
-          'w-full rounded-xl border bg-white px-4 py-3 text-[0.9375rem] text-ink-900 transition-colors duration-200',
+          'w-full min-h-12 rounded-xl border bg-white px-4 py-3.5 text-base text-ink-900 transition-colors duration-200',
           'placeholder:text-ink-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/12 focus:outline-none',
           error ? 'border-red-400' : 'border-ink-900/12 hover:border-ink-900/25',
         )}

@@ -7,18 +7,19 @@ import { SERVICES } from '@/lib/site';
 
 export function Services() {
   return (
-    <section id="services" className="scroll-mt-24 bg-white py-14 sm:py-20 lg:py-32">
+    <section id="services" className="scroll-mt-24 bg-white py-10 sm:py-20 lg:py-32">
       <Container>
-        <div className="flex flex-col gap-6 sm:gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-col gap-4 sm:gap-8 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
             eyebrow="What We Clean"
             title="One crew for the whole exterior"
             lede="Everything outside the walls, handled by the same team - so you are not chasing four different contractors to get a property looking right."
+            ledeClassName="hidden md:block"
           />
           <div
             data-reveal=""
             style={{ '--reveal-delay': '160ms' } as React.CSSProperties}
-            className="hidden shrink-0 lg:block"
+            className="hidden shrink-0 xl:block"
           >
             <Button href="#quote" variant="outline">
               Request a Free Quote
@@ -37,7 +38,7 @@ export function Services() {
           visitor is only scanning. Square crops at this size keep the subject
           readable where a wide crop would not.
         */}
-        <ul className="mt-9 grid grid-cols-2 gap-x-3 gap-y-5 sm:mt-16 sm:gap-x-6 sm:gap-y-8 lg:grid-cols-4">
+        <ul className="mt-6 grid grid-cols-2 gap-x-2.5 gap-y-4 sm:mt-12 sm:gap-x-5 sm:gap-y-7 md:mt-14 md:grid-cols-4 md:gap-4 lg:mt-16 lg:gap-x-6 lg:gap-y-8">
           {SERVICES.map((service, i) => (
             <li
               key={service.slug}
@@ -49,12 +50,12 @@ export function Services() {
                 aria-label={`${service.title} - request a free quote`}
                 className="group block focus-visible:outline-none"
               >
-                <div className="relative aspect-square overflow-hidden rounded-xl bg-ink-100 group-focus-visible:ring-2 group-focus-visible:ring-brand-500 group-focus-visible:ring-offset-2 sm:aspect-4/3 sm:rounded-2xl">
+                <div className="relative aspect-square overflow-hidden rounded-xl bg-ink-100 group-focus-visible:ring-2 group-focus-visible:ring-brand-500 group-focus-visible:ring-offset-2 sm:aspect-[4/3] sm:rounded-2xl">
                   <Image
                     src={service.image}
                     alt={service.imageAlt}
                     fill
-                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
                     className="object-cover transition-transform duration-[700ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.06]"
                   />
 
@@ -85,7 +86,7 @@ export function Services() {
                     </h3>
                     {/* The one-liner is detail, not navigation: at two columns
                         on a phone it turns each tile into a wall of text. */}
-                    <p className="mt-1.5 hidden text-[0.8125rem] leading-snug text-white/75 sm:block">
+                    <p className="mt-1.5 hidden text-[0.8125rem] leading-snug text-white/75 lg:block">
                       {service.short}
                     </p>
                   </div>
@@ -96,8 +97,8 @@ export function Services() {
         </ul>
 
         {/* Mobile / tablet equivalent of the header CTA. */}
-        <div data-reveal="" className="mt-8 sm:mt-12 lg:hidden">
-          <Button href="#quote" size="lg" className="w-full sm:w-auto">
+        <div data-reveal="" className="mt-6 sm:mt-12 xl:hidden">
+          <Button href="#quote" size="md" className="w-full sm:w-auto">
             Request a Free Quote
           </Button>
         </div>
