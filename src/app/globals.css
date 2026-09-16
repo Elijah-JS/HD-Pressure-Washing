@@ -1,0 +1,182 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   HD Pressure Washing - design system
+   Palette derives from the brand colors used on the existing site:
+   #0291F9 (brand blue) and #003A6B (deep navy).
+   ========================================================================== */
+
+@theme {
+  /* --- Brand blue ------------------------------------------------------- */
+  --color-brand-50: #eff8ff;
+  --color-brand-100: #dbeefe;
+  --color-brand-200: #bfe2fe;
+  --color-brand-300: #93d1fd;
+  --color-brand-400: #60b7fa;
+  --color-brand-500: #0291f9;
+  --color-brand-600: #0277d4;
+  --color-brand-700: #045fab;
+  --color-brand-800: #08508d;
+  --color-brand-900: #0d4374;
+
+  /* --- Deep navy (the anchor dark) -------------------------------------- */
+  --color-navy-50: #eef6fc;
+  --color-navy-100: #d5e8f6;
+  --color-navy-600: #004a89;
+  --color-navy-700: #003a6b;
+  --color-navy-800: #002c52;
+  --color-navy-900: #001e3a;
+  --color-navy-950: #00121f;
+
+  /* --- Neutrals --------------------------------------------------------- */
+  --color-ink-900: #0c1116;
+  --color-ink-800: #161d24;
+  --color-ink-700: #2a343e;
+  --color-ink-600: #47535f;
+  --color-ink-500: #65727f;
+  --color-ink-400: #8b97a3;
+  --color-ink-300: #b9c2cb;
+  --color-ink-200: #dce1e7;
+  --color-ink-100: #eef1f4;
+  --color-ink-50: #f6f8fa;
+  --color-bone: #fbfaf8;
+
+  /* --- Type ------------------------------------------------------------- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Motion ----------------------------------------------------------- */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* --- Shadows -----------------------------------------------------------
+     Kept shallow and neutral. These exist to separate a surface from the one
+     behind it, not to make anything float. No colour is mixed in - a tinted
+     shadow reads as a glow, and a glow reads as decoration. */
+  --shadow-subtle: 0 1px 2px rgb(12 17 22 / 0.04), 0 3px 8px -3px rgb(12 17 22 / 0.05);
+  --shadow-lift: 0 1px 2px rgb(12 17 22 / 0.04), 0 8px 18px -8px rgb(12 17 22 / 0.08);
+  --shadow-deep: 0 2px 6px rgb(12 17 22 / 0.04), 0 18px 36px -22px rgb(12 17 22 / 0.13);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* header height + breathing room so anchors never land under the nav */
+    scroll-padding-top: 5.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-bone);
+    color: var(--color-ink-800);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink-900);
+    text-wrap: balance;
+    letter-spacing: -0.022em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible, on-brand focus ring for keyboard users only. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-500);
+    color: #fff;
+  }
+
+  /* Tabular figures for phone numbers so they never look ragged. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Hairline rules that read as "designed" rather than as borders. */
+@utility rule-t {
+  border-top: 1px solid color-mix(in srgb, var(--color-ink-900) 8%, transparent);
+}
+
+/* ==========================================================================
+   Entrance animation
+   Elements tagged data-reveal fade/slide in once, via IntersectionObserver.
+
+   The hidden state is scoped to `html.js`, which is set by a tiny inline
+   script in <head>. If scripting is unavailable or that script fails, the
+   rule never applies and every element renders visible - content must never
+   depend on JS to be readable.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.7s var(--ease-out-soft),
+      transform 0.7s var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .js [data-reveal='shown'] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Slow ambient drift on the hero image.
+   Desktop only: on a phone the hero crop is already tight, so scaling it
+   further just eats the subject - and it burns battery for an effect nobody
+   is looking at. The range is small enough to register as depth, not motion. */
+@keyframes hero-drift {
+  from {
+    transform: scale(1.03) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.07) translate3d(-0.8%, -0.5%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+  .hero-drift {
+    animation: hero-drift 32s var(--ease-out-soft) infinite alternate;
+  }
+}

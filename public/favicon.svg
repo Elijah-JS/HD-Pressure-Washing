@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="HD Pressure Washing">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#003a6b"/>
+      <stop offset="1" stop-color="#00121f"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+  <text x="32" y="43.5" font-family="Archivo, Inter, Helvetica, Arial, sans-serif" font-size="30" font-weight="800" letter-spacing="-1.2" text-anchor="middle" fill="#ffffff">H<tspan fill="#0291f9">D</tspan></text>
+</svg>
